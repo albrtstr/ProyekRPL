@@ -5,7 +5,11 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
+
     <head>
+        <script type="text/javascript">
+            
+        </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,6 +29,7 @@ and open the template in the editor.
         <!-- Theme Style -->
         <link rel="stylesheet" href="css/style.css">
     </head>
+
     <body>
         <header class="site-header js-site-header">
             <div class="container-fluid">
@@ -69,27 +74,27 @@ and open the template in the editor.
             <div class="container">
                 <div class="row check-availabilty" id="next">
                     <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
-                        <form action="#">
+                        <form action="./halutLogin.html" method="POST" name="login">
                             <div class="row">
                                 <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                                     <label for="username" class="font-weight-bold text-black">USERNAME</label>
                                     <div class="field-icon-wrap">
                                         <div class="icon"><span class="icon-calendar"></span></div>
-                                        <input type="text" id="username" class="form-control">
+                                        <input name="username" type="text" id="username" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                                     <label for="password" class="font-weight-bold text-black">PASSWORD</label>
                                     <div class="field-icon-wrap">
                                         <div class="icon"><span class="icon-calendar"></span></div>
-                                        <input type="text" id="password" class="form-control">
+                                        <input name="password" type="password" id="password" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-3 align-self-end">
                                     <input type="submit" value= "LOGIN" class="btn btn-primary btn-block text-white">
                                 </div>
                                 <div class="col-md-6 col-lg-3 align-self-end">
-                                    <a href="registrasi.html" class="btn btn-primary btn-block text-white">DAFTAR</a>
+                                    <a href="registrasi.jsp" class="btn btn-primary btn-block text-white">DAFTAR</a>
                                 </div>
                             </div>
                         </form>

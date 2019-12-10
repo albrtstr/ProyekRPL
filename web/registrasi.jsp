@@ -2,6 +2,23 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <script type="text/javascript">
+            function notifDaftar(){
+                var nama_customer = document.forms["inputCustomer"]["nama"].value;
+                var username_customer = document.forms["inputCustomer"]["username"].value;
+                var password_customer = document.forms["inputCustomer"]["password"].value;
+                var alamat_customer = document.forms["inputCustomer"]["alamat"].value;
+                var phone_customer = document.forms["inputCustomer"]["phone"].value;
+                if  ((nama_customer && username_customer && password_customer && alamat_customer && phone_customer) === ""){
+                    alert("Data belum diisi dengan lengkap!");
+                    return false;
+                }
+                if ((nama_customer && username_customer && password_customer && alamat_customer && phone_customer) !== null){
+                    alert("Berhasil daftar!");
+                }
+            }
+        </script>
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Aria Rooms and Swimming Pool</title>
@@ -69,38 +86,38 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
-                        <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+                        <form name="inputCustomer" method="GET" action="./addUser" class="bg-white p-md-5 p-4 mb-5 border">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="name">Nama</label>
-                                    <input type="text" id="name" class="form-control ">
+                                    <input type="text" id="name" name="nama" class="form-control ">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="phone">Telepon</label>
-                                    <input type="text" id="phone" class="form-control ">
+                                    <input type="text" id="phone" name="phone" class="form-control ">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="username">Username</label>
-                                    <input type="text" id="checkin_date" class="form-control">
+                                    <input type="text" id="username" name="username" class="form-control">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="password">Password</label>
-                                    <input type="text" id="checkout_date" class="form-control">
+                                    <input type="password" id="password" name="password" class="form-control">
                                 </div>
                             </div>
 
                             <div class="row mb-4">
                                 <div class="col-md-12 form-group">
-                                    <label class="text-black font-weight-bold" for="message">Alamat</label>
-                                    <textarea name="message" id="message" class="form-control " cols="30" rows="8"></textarea>
+                                    <label class="text-black font-weight-bold" for="alamat">Alamat</label>
+                                    <textarea id="alamat" name="alamat" class="form-control " cols="30" rows="8"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input type="submit" value="Registrasi" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                                    <input onclick="return notifDaftar()" type="submit" value="Registrasi" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
                                 </div>
                             </div>
                         </form> 

@@ -14,40 +14,16 @@ import java.sql.SQLException;
  * @author M S I
  */
 public class DataBaseConnection {
-    private String jdbcURL = "jdbc:oracle:thin:@172.23.9.185:1521:orcl";
-    private String user = "MHS185314105";
-    private String password = "MHS185314105";
+    
     private Connection connection = null;
     
     public DataBaseConnection(){
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            connection = DriverManager.getConnection(jdbcURL, user, password);
-            System.out.println("Koneksi Berhasil!!!");
-        } catch (Exception ex){
-            System.out.println("message: " +ex.getMessage());
-        }
-    }
-    
-    public boolean isConnected(){
-        if (connection != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    public boolean getClosed(){
-        if (isConnected()) {
-            try {
-                connection.close();
-                connection = null;
-            } catch (SQLException ex){
-                ex.printStackTrace();
-            }
-            return true;
-        } else {
-            return false;
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/rpl", "root", "");
+        } catch (ClassNotFoundException | SQLException e){
+            System.out.println("Offline");
         }
     }
     
@@ -57,5 +33,7 @@ public class DataBaseConnection {
     
     public static void main (String[] args){
         DataBaseConnection database = new DataBaseConnection();
+//        int randomIntegerRange = getRandomIntegerWithinRange(10, 20);
+//        System.out.println();
     }
 }
