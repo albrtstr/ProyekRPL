@@ -20,6 +20,10 @@
         <servlet-name>Booking</servlet-name>
         <servlet-class>Servlet.Booking</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>tambahKamar</servlet-name>
+        <servlet-class>Servlet.tambahKamar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addUser</servlet-name>
         <url-pattern>/addUser</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>Booking</servlet-name>
         <url-pattern>/Booking</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tambahKamar</servlet-name>
+        <url-pattern>/tambahKamar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Servlet;
 
 import Fungsi.DataBaseConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Connection;
 import java.sql.Statement;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class showUser extends HttpServlet {
+@WebServlet(name = "hapusAkun", urlPatterns = {"/hapusAkun"})
+public class hapusAkun extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class showUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet showUser</title>");
+            out.println("<title>Servlet hapusAkun</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet showUser at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet hapusAkun at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,47 +62,21 @@ public class showUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         System.out.println("ad");
         response.setContentType("text/html");
         DataBaseConnection conn = new DataBaseConnection();
+        Connection connect = conn.getConnection();
         PrintWriter out = response.getWriter();
+        String id = request.getParameter("idAkun");
+        System.out.println(id);
+        
         try {
-            String query = "select * from customer";
+            String query = "delete from customer where idCustomer= " +id+ "";
             Statement statement = conn.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query);
-
-            out.print("<html>");
-            out.print("<body>");
-            out.print("<center><table border=3>");
-            out.print("<tr>");
-            out.print("<td>ID Akun</td>");
-           out.print("<td>Nama</td>");
-            out.print("<td>Username</td>");
-            out.print("<td>Password</td>");
-            out.print("<td>Alamat</td>");
-            out.print("</tr>");
-
-            while (result.next()) {
-                out.print("<tr>");
-                out.print("<form action ='hapusAkun'>");
-                out.print("");
-                out.print("<td><input type=\"text\" name='idAkun' value='" + result.getString(1) + "' readonly></td>");
-                out.print("<td>" + result.getString(2) + "</td>");
-                out.print("<td>" + result.getString(3) + "</td>");
-                out.print("<td>" + result.getString(4) + "</td>");
-                out.print("<td>" + result.getString(5) + "</td>");
-                out.print("<td><input type='submit' value='hapus'></td>");
-                out.print("</form>");
-                out.print("</tr>");
-                
-            }
-
-            out.print("</table>");
-            out.print("</center>");
-            out.print("</body");
-            out.print("</html>");
-            statement.close();
+            int delete = statement.executeUpdate(query);
+            response.sendRedirect("showUser");
         } catch (Exception ex) {
-            System.out.println("Message: " + ex.getMessage());
+            out.println("message: " +ex.getMessage());
         }
     }
 

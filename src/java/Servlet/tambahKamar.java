@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package Servlet;
 
 import Fungsi.DataBaseConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class showUser extends HttpServlet {
+public class tambahKamar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +42,10 @@ public class showUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet showUser</title>");
+            out.println("<title>Servlet tambahKamar</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet showUser at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet tambahKamar at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,46 +65,15 @@ public class showUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html");
         DataBaseConnection conn = new DataBaseConnection();
+        Connection connect = conn.getConnection();
         PrintWriter out = response.getWriter();
-        try {
-            String query = "select * from customer";
-            Statement statement = conn.getConnection().createStatement();
-            ResultSet result = statement.executeQuery(query);
-
-            out.print("<html>");
-            out.print("<body>");
-            out.print("<center><table border=3>");
-            out.print("<tr>");
-            out.print("<td>ID Akun</td>");
-           out.print("<td>Nama</td>");
-            out.print("<td>Username</td>");
-            out.print("<td>Password</td>");
-            out.print("<td>Alamat</td>");
-            out.print("</tr>");
-
-            while (result.next()) {
-                out.print("<tr>");
-                out.print("<form action ='hapusAkun'>");
-                out.print("");
-                out.print("<td><input type=\"text\" name='idAkun' value='" + result.getString(1) + "' readonly></td>");
-                out.print("<td>" + result.getString(2) + "</td>");
-                out.print("<td>" + result.getString(3) + "</td>");
-                out.print("<td>" + result.getString(4) + "</td>");
-                out.print("<td>" + result.getString(5) + "</td>");
-                out.print("<td><input type='submit' value='hapus'></td>");
-                out.print("</form>");
-                out.print("</tr>");
-                
-            }
-
-            out.print("</table>");
-            out.print("</center>");
-            out.print("</body");
-            out.print("</html>");
-            statement.close();
-        } catch (Exception ex) {
-            System.out.println("Message: " + ex.getMessage());
-        }
+        
+        String id = request.getParameter("idKamar");
+        String tipe = request.getParameter("tipeKamar");
+        String harga = request.getParameter("hargaKamar");
+        
+        System.out.println(id + tipe + harga);
+       String button = request.getParameter("button");
     }
 
     /**
