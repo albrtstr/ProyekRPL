@@ -5,6 +5,7 @@
  */
 package Fungsi;
 
+import Tools.CustomerLogin;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,24 +18,31 @@ import java.sql.Statement;
  */
 public class LoginFunction {
 
-    public static boolean validate(String username, String password) {
+    public static boolean validate(CustomerLogin cust) {
         boolean status = false;
         try {
             DataBaseConnection conn = new DataBaseConnection();
             Connection connect = conn.getConnection();
 
-            Statement statement = conn.getConnection().createStatement();
-            String query = "select * from customer where username='" + username + "' and password='" + password + "'";
-
-            ResultSet rs = statement.executeQuery(query);
-            rs.next();
+            PreparedStatement ps = connect.prepareStatement("select * from customer where username = ? and password = ?");
+            ps.setString(1, cust.getUsername());
+            ps.setString(2, cust.getPassword());
+            
+            System.out.println(ps);
+            ResultSet rs = ps.executeQuery();
             status = rs.next();
-            if (rs.isFirst()) {
-                System.out.println("sukses");
-                return true;
-            } else {
-                return false;
-            }
+            //Statement statement = conn.getConnection().createStatement();
+            //String query = "select * from customer where username='" + username + "' and password='" + password + "'";
+
+//            ResultSet rs = statement.executeQuery(query);
+//            rs.next();
+//            status = rs.next();
+//            if (rs.isFirst()) {
+//                System.out.println("sukses");
+//                return true;
+//            } else {
+//                return false;
+//            }
         } catch (Exception ex) {
             System.out.println(ex);
         }

@@ -8,7 +8,14 @@ and open the template in the editor.
 
     <head>
         <script type="text/javascript">
-            
+            function login() {
+                var ganalar = document.forms["loginForm"]["username"].value;
+                var ganala1 = document.forms["loginForm"]["password"].value;
+                if ((ganalar && ganala1) === "") {
+                    alert("Data belum diisi!");
+                    return false;
+                }
+            }
         </script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,7 +81,7 @@ and open the template in the editor.
             <div class="container">
                 <div class="row check-availabilty" id="next">
                     <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
-                        <form action="./halutLogin.html" method="POST" name="login">
+                        <form action="./login" method="POST" name="loginForm">
                             <div class="row">
                                 <div class="col-md-6 mb-3 mb-lg-0 col-lg-3">
                                     <label for="username" class="font-weight-bold text-black">USERNAME</label>
@@ -91,7 +98,8 @@ and open the template in the editor.
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-3 align-self-end">
-                                    <input type="submit" value= "LOGIN" class="btn btn-primary btn-block text-white">
+                                    <button onclick="return login()" type=submit value="LOGIN" class="btn btn-primary btn-block text-white" name="buttonLogin">LOGIN</button>
+
                                 </div>
                                 <div class="col-md-6 col-lg-3 align-self-end">
                                     <a href="registrasi.jsp" class="btn btn-primary btn-block text-white">DAFTAR</a>

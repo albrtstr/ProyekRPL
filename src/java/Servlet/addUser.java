@@ -79,7 +79,7 @@ public class addUser extends HttpServlet {
         try {
             int max = 999;
             int min = 100;
-            int idRandom = (int)(Math.random()*((max-min)+1))+min;
+            int idRandom = (int) (Math.random() * ((max - min) + 1)) + min;
             Statement statement = conn.getConnection().createStatement();
             String query = "INSERT INTO `customer`(`idCustomer`, `nama`, `username`, `password`, `alamat`, `phone`) "
                     + "VALUES ('" + idRandom + "','" + nama + "','" + username + "','" + password + "','" + alamat + "','" + phone + "')";
