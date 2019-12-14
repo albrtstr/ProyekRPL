@@ -4,17 +4,17 @@
     <head>
         <script type="text/javascript">
             function notifDaftar() {
-                var id_kamar = document.forms["tambahKamar"]["id"].value;
-                var tipe_kamar = document.forms["tambahKamar]["tipeKamar"].value;
-                        var harga_kamar = document.forms["tambahKamar"]["hargaKamar"].value;
+                var id_kamar = document.forms["tambahKamar"]["idKamar"].value;
+                var tipe_kamar = document.forms["tambahKamar"]["tipeKamar"].value;
+                var harga_kamar = document.forms["tambahKamar"]["hargaKamar"].value;
 
-  
+
                 if ((id_kamar && tipe_kamar && harga_kamar) === "") {
                     alert("Data belum diisi dengan lengkap!");
                     return false;
                 }
                 if ((id_kamar && tipe_kamar && harga_kamar) !== null) {
-                    alert("Berhasil dimasukan!");
+                    alert("Kamar berhasil ditambahkan!");
                 }
             }
         </script>
@@ -90,26 +90,26 @@
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="id">ID KAMAR</label>
-                                    <input type="text" id="id" name="id" class="form-control ">
+                                    <input type="text" id="id" name="idKamar" class="form-control ">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="tipe">TIPE KAMAR</label>
-                                    <input type="text" id="tipe" name="tipe" class="form-control ">
+                                    <input type="text" id="tipe" name="tipeKamar" class="form-control ">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <label class="text-black font-weight-bold" for="harga">HARGA KAMAR</label>
-                                    <input type="text" id="harga" name="harga" class="form-control">
+                                    <input type="text" id="harga" name="hargaKamar" class="form-control">
                                 </div>
-                                
+
                             </div>
 
-                            
+
                             <div class="row">
                                 <div class="col-md-6 form-group">
-                                    <input onclick="return notifDaftar()" type="submit" value="Tambah" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                                    <button onclick="return notifDaftar()" type="submit" value="Tambah" class="btn btn-primary text-white py-3 px-5 font-weight-bold">Tambah</button>
                                 </div>
                             </div>
                         </form> 

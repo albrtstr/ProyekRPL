@@ -24,6 +24,10 @@
         <servlet-name>tambahKamar</servlet-name>
         <servlet-class>Servlet.tambahKamar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>halutLogin1</servlet-name>
+        <servlet-class>Servlet.halutLogin1</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addUser</servlet-name>
         <url-pattern>/addUser</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>tambahKamar</servlet-name>
         <url-pattern>/tambahKamar</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>halutLogin1</servlet-name>
+        <url-pattern>/halutLogin1</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

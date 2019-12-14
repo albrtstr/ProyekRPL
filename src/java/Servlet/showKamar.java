@@ -9,11 +9,11 @@ import Fungsi.DataBaseConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class tambahKamar extends HttpServlet {
+@WebServlet(name = "showKamar", urlPatterns = {"/showKamar"})
+public class showKamar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +42,10 @@ public class tambahKamar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet tambahKamar</title>");
+            out.println("<title>Servlet showKamar1</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet tambahKamar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet showKamar1 at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,32 +63,47 @@ public class tambahKamar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("ad");
         response.setContentType("text/html");
         DataBaseConnection conn = new DataBaseConnection();
         Connection connect = conn.getConnection();
         PrintWriter out = response.getWriter();
-
-        String id = request.getParameter("idKamar");
-        String tipe = request.getParameter("tipeKamar");
-        String harga = request.getParameter("hargaKamar");
-
-        System.out.println(id + tipe + harga);
-        String button = request.getParameter("button");
-
         try {
-            int max = 999;
-            int min = 100;
-
+            String querykamar = "select * from kamar";
             Statement statement = conn.getConnection().createStatement();
-            String query = "INSERT INTO `kamar`(`idKamar`, `tipeKamar`, `hargaKamar`) "
-                    + "VALUES ('" + id + "','" + tipe + "','" + harga + "')";
-            statement.executeUpdate(query);
-            response.sendRedirect("tambahKamar.jsp");
-            statement.close();
+            ResultSet result = statement.executeQuery(querykamar);
+            out.print("<html>");
+            out.print("<body>");
+            out.print("<center> <h1> KAMAR ARIA ROOM AND SWIMMING POOL </h1> <table border=3>");
+            out.print("<tr>");
+            out.print("<td>ID Kamar</td>");
+            out.print("<td>Tipe Kamar</td>");
+            out.print("<td>Harga Kamar</td>");
+            out.print("</tr>");
+            while (result.next()) {
+                out.print("<tr>");
+                out.print("<form action ='updateKamar'>");
+                out.print("<form action ='hapusKamar'>");
+                out.print("");
+                out.print("<td><input type=\"text\" name='idKamar' value='" + result.getString(1) + "' readonly></td>");
+                out.print("<td>" + result.getString(2) + "</td>");
+                out.print("<td>" + result.getString(3) + "</td>");
+                out.print("<td>" + result.getString(4) + "</td");
+                out.print("<td><input type='submit' value='update'></td>");
+                out.print("<td><input type='submit' value='hapus'></td>");
+                out.print("</form>");
+                out.print("</tr>");
 
-        } catch (SQLException ex) {
-            System.out.println("Message: " + ex.getMessage());
+            }
+            out.print("</table><br>");
+            out.print("<a href = 'admin.html'>Kembali</center>");
+            out.print("<a href = 'tambahKamar.jsp'>Tambah Kamar");
+            out.print("</body>");
+            out.print("</html>");
+        } catch (SQLException e) {
+            out.print("Message :" + e.getMessage());
         }
+
     }
 
     /**

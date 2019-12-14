@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,11 +30,12 @@ import javax.servlet.http.HttpServletResponse;
 public class login extends HttpServlet {
 
     private LoginFunction loginMasuk;
-    
+
     @Override
-    public void init(){
+    public void init() {
         loginMasuk = new LoginFunction();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -83,13 +85,12 @@ public class login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    public static boolean validate(String username, String password){
+    public static boolean validate(String username, String password) {
         boolean status = false;
-        
+
         return status;
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -99,21 +100,31 @@ public class login extends HttpServlet {
         Connection connect = conn.getConnection();
 
         String username = request.getParameter("username");
+        String nama = request.getParameter("nama");
         String password = request.getParameter("password");
         CustomerLogin loginf = new CustomerLogin();
         loginf.setUsername(username);
         loginf.setPassword(password);
         boolean status = false;
+        HttpSession session = request.getSession();
+
         try {
             if (LoginFunction.validate(loginf)) {
-                response.sendRedirect("halutLogin");
-            }else{
+                String query = "select * from customer where username='" + username + "'";
+                Statement statement = conn.getConnection().createStatement();
+                ResultSet res = statement.executeQuery(query);
+                if (res.next()) {
+                    String namaquery = res.getString(2);
+                    session.setAttribute("nama", namaquery);
+                }
+
+                response.sendRedirect("halutLogin1");
+            } else {
                 out.println("<html>");
                 out.println("<script>");
                 out.println("alert(\"Login Gagal\")");
                 out.println("</script>");
-                
-                
+
                 response.sendRedirect("login.jsp");
             }
         } catch (Exception ex) {
